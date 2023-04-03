@@ -1,0 +1,37 @@
+server:
+  port: 9090 # set to 0 for random port assignment
+
+spring:
+  application:
+    name: basic-cloud-other-worker
+  config:
+    import: "optional:configserver:http://localhost:8888"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  tracing:
+    sampling:
+      probability: 1.0
+    propagation:
+      type: b3
+
+# can talk to the nearest AZ in AWS
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true # if needs to call other services
+    service-url:
+      defaultZone: 'http://localhost:8761/eureka/'
+
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+    hostname: localhost
+
+
+logging:
+  pattern:
+    level:  "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    web: debug

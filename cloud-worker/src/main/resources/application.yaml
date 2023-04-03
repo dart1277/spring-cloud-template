@@ -1,0 +1,87 @@
+server:
+  port: 9080 # set to 0 for random port assignment
+
+spring:
+  application:
+    name: basic-cloud-worker
+  profiles:
+    active: default
+#  cloud:
+#    config:
+#      retry:
+#         initial-interval: 1000
+#         max-attempts: 6
+#         max-interval: 2000
+#         multiplier: 1.1
+#      fail-fast: true # fails fast on startup if server cannot be rached
+#      profile: default
+#      token: token_Value
+  #      label: "main" # main branch, tag, commit label
+#      username: user # basic auth
+#      password: password
+  config:
+    import: "optional:configserver:http://localhost:8888"
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#        include: 'refresh' # used by actuator to enable config refresh performed by issuing POST http://localhost:9080/actuator/refresh targets beans with @RefreshScope
+
+  tracing:
+    sampling:
+      probability: 1.0 # docker run -p 9411:9411 openzipkin/zipkin:latest
+
+# can talk to the nearest AZ in AWS
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true # if needs to call other services
+    healthcheck:
+      enabled: true
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+    hostname: localhost
+
+logging:
+  pattern:
+    level:  "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    web: debug
+
+
+# https://resilience4j.readme.io/docs/circuitbreaker
+resilience4j.timelimiter:
+  configs:
+    item-service:
+      timeout-duration: 4s
+
+resilience4j.retry:
+  configs:
+    item-service:
+      enable-exponential-backoff: true
+      exponential-backoff-multiplier: 1.2
+      exponential-max-wait-duration: 4s
+
+resilience4j.bulkhead:
+  configs:
+    item-service:
+      max-concurrent-calls: 4
+      max-wait-duration: 4s
+
+resilience4j.circuitbreaker:
+  configs:
+      item-service:
+        register-health-indicator: true
+        failureRateThreshold: 50
+        slow-call-duration-threshold: 2500
+        slow-call-rate-threshold: 50
+        minimumNumberOfCalls: 10
+        slidingWindowType: TIME_BASED
+        slidingWindowSize: 10
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 3
+        exponential-max-wait-duration-in-open-state: 50s
+        max-wait-duration-in-half-open-state: 10s

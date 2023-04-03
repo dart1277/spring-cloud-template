@@ -1,0 +1,79 @@
+server:
+  port: 9070 # set to 0 for random port assignment
+
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: default
+  cloud:
+    gateway:
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
+      discovery:
+        locator:
+          enabled: true
+      routes:
+#        - id: svc
+#          uri: "http://localhost:9081" # hardcoded
+#          predicates:
+#            - Method=GET
+        - id: item-service
+          uri: "lb://basic-cloud-worker" # uses eureka
+          predicates:
+            - Method=GET,POST
+            # - Path=/api/items/{id}
+            - Path=/api/items/**
+            - Query=apiCaller
+          filters: # pre, routing, post and global filters
+            # http://localhost:9070/api/items/1?apiCaller=1
+            # - SetPath=/web/sync-item/{id}
+            - RewritePath=/api/items/(?<segment>.*),/web/sync-item/$\{segment}
+            - AddResponseHeader=X-Header-Custom,value of header
+
+  #    config:
+  #      retry:
+  #         initial-interval: 1000
+  #         max-attempts: 6
+  #         max-interval: 2000
+  #         multiplier: 1.1
+  #      fail-fast: true # fails fast on startup if server cannot be rached
+  #      profile: default
+  #      token: token_Value
+  #      label: "main" # main branch, tag, commit label
+  #      username: user # basic auth
+  #      password: password
+#  config:
+#    import: "optional:configserver:http://localhost:8888"
+
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  #        include: 'refresh' # used by actuator to enable config refresh performed by issuing POST http://localhost:9080/actuator/refresh targets beans with @RefreshScope
+#
+#  tracing:
+#    sampling:
+#      probability: 1.0 # docker run -p 9411:9411 openzipkin/zipkin:latest
+
+# can talk to the nearest AZ in AWS
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true # if needs to call other services
+    healthcheck:
+      enabled: true
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+    hostname: localhost
+    non-secure-port: 8761
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: DEBUG

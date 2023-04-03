@@ -1,0 +1,68 @@
+server:
+  port: 9061
+
+spring:
+  application:
+    name: stream-processor
+  cloud:
+    function:
+      definition: read;generateItems;processItem
+      # routing-expression: "headers['q'] == 'fast' ? 'functionA': 'functionB'"
+    stream:
+      function:
+        routing:
+          enabled: true
+      bindings:
+        generateItems-out-0:
+          producer:
+            auto-startup: true
+#            partition-count: 3
+#            partition-key-expression: payload.id
+            poller:
+              fixed-delay: 1s
+#              cron: "*/1 * * * * *"
+          destination: newitemtopic4
+          content-type: application/json # set in header or binding, if no content-type set it defaults to json (MessageConverters, Pojo, bytestream, string)
+          group: a
+
+        processItem-in-0:
+          destination: newitemtopic4
+          content-type: application/json
+          group: a
+        processItem-out-0:
+          destination: newitemtopic5
+          content-type: application/json
+          group: a
+
+        read-in-0:
+          destination: newitemtopic5
+          consumer:
+            # partitioned: true
+            auto-startup: true
+          content-type: application/json
+          group: b # makes subscription durable, survives restarts
+      # instance-count: 3 # required for consumer partitioning
+      # instance-index: 0 # indicates to which partition instance belongs
+
+  #        functionRouter-in-0: special pre-defined router binding, uses routing-expression
+#          destination: newitemtopic5
+#          content-type: application/json
+
+
+  # docker run --rm -p 5672:5672 -p 15672:15672 rabbitmq:3.10-management
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    password: guest
+    username: guest
+#    stream:
+#      username: guest
+#      password: guest
+#      host: localhost
+#      port: 5672
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          stream: DEBUG

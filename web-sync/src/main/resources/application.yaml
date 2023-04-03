@@ -1,0 +1,55 @@
+server:
+  port: 9081 # set to 0 for random port assignment
+
+spring:
+  application:
+    name: sync-cloud-worker
+  profiles:
+    active: default
+  #  cloud:
+  #    config:
+  #      retry:
+  #         initial-interval: 1000
+  #         max-attempts: 6
+  #         max-interval: 2000
+  #         multiplier: 1.1
+  #      fail-fast: true # fails fast on startup if server cannot be rached
+  #      profile: default
+  #      token: token_Value
+  #      label: "main" # main branch, tag, commit label
+  #      username: user # basic auth
+  #      password: password
+#  config:
+#    import: "optional:configserver:http://localhost:8888"
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  #        include: 'refresh' # used by actuator to enable config refresh performed by issuing POST http://localhost:9080/actuator/refresh targets beans with @RefreshScope
+
+  tracing:
+    sampling:
+      probability: 1.0 # docker run -p 9411:9411 openzipkin/zipkin:latest
+
+# can talk to the nearest AZ in AWS
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true # if needs to call other services
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: "http://localhost:8761/eureka"
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+    hostname: localhost
+    prefer-ip-address: true
+
+logging:
+  pattern:
+    level:  "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    web: debug

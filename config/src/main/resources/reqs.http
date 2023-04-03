@@ -1,0 +1,10 @@
+GET http://localhost:8888/cloud-worker/default
+
+###
+GET http://localhost:8888/cloud-worker/test
+
+###
+POST http://localhost:8888/encrypt
+Content-Type: text/plain
+
+secretVal:aaabbbccc333444

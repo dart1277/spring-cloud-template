@@ -1,0 +1,30 @@
+server:
+  port: 8888
+spring:
+  profiles:
+    active: native
+#  security:
+#    user: user
+#    password: password # csrf needs to be disabled using WebSecurityConfigurerAdapter
+#  cloud:
+#    config:
+#      server:
+#        encrypt:
+#          enabled: false # disable server side config file decryption # add encrypt.key= on the client instead
+#        git:
+#          uri: https://abc.def
+#          search-paths:
+#            - config*
+#          repos: #{application}/{profile}/{label}
+#            dev:
+#              clone-on-start: true
+#              pattern:
+#                - '*/dev' # match all applications with dev profile
+#              uri: " https://github.com/development/config-repo"
+#              search-paths:
+#                - "config_dir,other_config_dir*" # config directories
+#          username: "cx"
+#          password: "gh_pat"
+#          refresh-rate: 600
+encrypt:
+  key: asdfg14564 # exposes /encrypt endpoint # https://www.baeldung.com/spring-cloud-configuration

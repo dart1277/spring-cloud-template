@@ -1,0 +1,23 @@
+server:
+  port: 9083 # set to 0 for random port assignment
+
+spring:
+  application:
+    name: loadbalanced-client
+  profiles:
+    active: default
+
+
+  cloud:
+    loadbalancer:
+      instances:
+        - name: "sync-cloud-worker"
+          servers: "http://localhost:9081"
+      clients:
+        sync-cloud-worker:
+          retry:
+            enabled: true
+
+loadbalancer:
+  client:
+    name: custom-alb-name
