@@ -1,0 +1,22 @@
+
+
+### req 0
+GET http://localhost:8051/getItem/123
+
+### req 1
+GET http://localhost:8051/getItemSup
+
+### req 2
+POST http://localhost:8051/setItem
+Content-Type: application/json
+
+{
+  "id": "setItemId1",
+  "info": "Post request"
+}
+
+### req 3
+# default function
+GET http://localhost:8051/
+
+###

@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/cloud-other-worker" />
     <file type="web" url="file://$PROJECT_DIR$/cloud-worker" />
     <file type="web" url="file://$PROJECT_DIR$/config" />
+    <file type="web" url="file://$PROJECT_DIR$/fun" />
     <file type="web" url="file://$PROJECT_DIR$/gateway" />
     <file type="web" url="file://$PROJECT_DIR$/loadbalanced" />
     <file type="web" url="file://$PROJECT_DIR$/stream" />
