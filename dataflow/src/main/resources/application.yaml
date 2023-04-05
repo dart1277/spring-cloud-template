@@ -74,3 +74,14 @@ logging:
 
 #  app.itemFilter.spring.cloud.stream.function.bindings.assign-in-0=input
 #  app.itemFilter.spring.cloud.stream.function.bindings.assign-out-0=output
+
+# tasks
+
+#  task crete mytask --definition "load-data && send-slack"
+#
+#  task crete mytask --definition "load-data 'ERROR' -> email 'SUCCESS' -> send-slack" # driven by exit status
+#
+#  task crete mytask --definition "<load-data || send-slack>" # execute in parallel
+
+# to create custom task and spring task dependency, jdbc and h2
+# inside app add @EnableTask annotation and define CommandLineRunner @Bean (consumer)
