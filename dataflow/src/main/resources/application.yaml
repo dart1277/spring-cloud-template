@@ -1,0 +1,76 @@
+
+
+spring:
+  cloud:
+    function:
+      definition: assign
+    stream:
+      function:
+        bindings:
+          assign-in-0: input
+          assign-out-0: output
+
+
+
+#  wget -O docker-compose.yml https://raw.githubusercontent.com/spring-cloud/spring-cloud-dataflow/main/src/docker-compose/docker-compose.yml;
+#  wget -O docker-compose-rabbitmq.yml https://raw.githubusercontent.com/spring-cloud/spring-cloud-dataflow/main/src/docker-compose/docker-compose-rabbitmq.yml;
+#  wget -O docker-compose-postgres.yml https://raw.githubusercontent.com/spring-cloud/spring-cloud-dataflow/main/src/docker-compose/docker-compose-postgres.yml;
+
+# curl https://repo.maven.apache.org/maven2/org/springframework/cloud/spring-cloud-dataflow-shell/2.10.2/spring-cloud-dataflow-shell-2.10.2.jar -o spring-cloud-dataflow-shell-2.10.2.jar
+
+#  export DATAFLOW_VERSION=2.10.2
+#  export SKIPPER_VERSION=2.9.2
+
+# docker-compose -f docker-compose.yml -f docker-compose-rabbitmq.yml -f docker-compose-postgres.yml up
+
+# java -jar  spring-cloud-dataflow-shell-2.10.2.jar
+# > stream list
+
+# dashboard
+# http://localhost:9393/dashboard/index.html#/apps
+
+# shell
+#> stream create --definition "file --directory=/temp | myFilterLabel: filter | log" --name stream1
+# stream create --definition ":stream1.myFilterLabel > log" --name stream2 # forks a stream
+
+# https://docs.spring.io/spring-cloud-stream-app-starters/docs/current/reference/html/
+# https://docs.spring.io/spring-cloud-dataflow/docs/2.10.2/reference/htmlsingle/#_out_of_the_box_stream_applications # choose starter dependency
+
+#app import --uri https://dataflow.spring.io/rabbitmq-maven-latest
+#
+#app list
+#
+#https://www.springcloud.io/post/2022-04/spring-cloud-dataflow-shell/#gsc.tab=0
+#
+#stream create --definition "http --port=20003 | file --directory=/home/cnb/scdf/df-out --name=output --suffix=txt" --name ps-stream1 --deploy true
+#stream destroy --name ps-stream1
+
+# stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=\"new String(payload).toUpperCase()\" | output: file --directory=/home/cnb/scdf/df-out --name=output7 --suffix=txt" --name ps-stream7 --deploy true
+# stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression='''payload'''+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output2 --suffix=txt" --name ps-stream2 --deploy true
+# stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload.append('updated') | output: file --directory=/home/cnb/scdf/df-out --name=output3 --suffix=txt" --name ps-stream3 --deploy true
+
+
+#app import --uri https://dataflow.spring.io/task-maven-latest
+#
+#task create ps-taks-1 --definition "timestamp --format=\"MM-yy\""
+#task list
+#task launch ps-taks-1
+#task execution list
+#task execution log 1
+
+
+# creating streams using GUI
+
+# toll-stream=http --port=8086 | split-JSON: splitter --expression=#jsonPath(payload, '$.station.readings') | log
+# tollstreamcounter=:toll-stream.split-JSON > throughput # tap and send to app
+logging:
+  level:
+    org: DEBUG
+# stream create --definition "http --port=20002 | itemFilter --filter='abf' | log" --name item-2 --deploy true
+
+# or in the GUI:
+# item-5=http --port=20002 | itemFilter --filter='abc' | log
+# then on deployment add bindings:
+
+#  app.itemFilter.spring.cloud.stream.function.bindings.assign-in-0=input
+#  app.itemFilter.spring.cloud.stream.function.bindings.assign-out-0=output

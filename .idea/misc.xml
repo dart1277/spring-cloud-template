@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/cloud-other-worker" />
     <file type="web" url="file://$PROJECT_DIR$/cloud-worker" />
     <file type="web" url="file://$PROJECT_DIR$/config" />
+    <file type="web" url="file://$PROJECT_DIR$/dataflow" />
     <file type="web" url="file://$PROJECT_DIR$/fun" />
     <file type="web" url="file://$PROJECT_DIR$/gateway" />
     <file type="web" url="file://$PROJECT_DIR$/loadbalanced" />
@@ -18,6 +19,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/web/pom.xml" />
+        <option value="$PROJECT_DIR$/dataflow/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

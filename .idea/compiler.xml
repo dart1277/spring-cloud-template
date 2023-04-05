@@ -9,13 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="web" />
         <module name="eureka" />
+        <module name="dataflow" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.26/8f8cf0372abf564913e9796623aac4c8ea44025a/lombok-1.18.26.jar" />
         </processorPath>
-        <module name="fun.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,10 +23,13 @@
       <module name="com.cx.cloud-worker" target="17" />
       <module name="com.cx.cloud-worker.main" target="17" />
       <module name="com.cx.cloud-worker.test" target="17" />
+      <module name="dataflow.main" target="17" />
+      <module name="dataflow.test" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dataflow" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="web" options="-parameters" />
     </option>

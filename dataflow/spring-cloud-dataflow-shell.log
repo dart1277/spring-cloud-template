@@ -1,0 +1,188 @@
+1680687049168:stream list
+1680691821874:app import --uri http://bit.ly/Bacon-RELEASE-stream-applications-rabbit-maven
+1680692196872:app import --uri https://dataflow.spring.io/rabbitmq-maven-latest
+1680692283391:app list
+1680692690669:stream create --definition "http --port=8087 | file --directory=/home/cnb/scdf/df-out --name=output --suffix=txt" --name=ps-stream1 --deploy=true
+1680692721836:stream create --definition "http --port=8087 | file --directory=/home/cnb/scdf/df-out --name=output --suffix=txt" --name ps-stream1 --deploy=true
+1680692725502:stream create --definition "http --port=8087 | file --directory=/home/cnb/scdf/df-out --name=output --suffix=txt" --name ps-stream1 --deploy true
+1680692780981:stream list
+1680692977079:help
+1680693004378:dataflow config info
+1680693197091:stream
+1680693274574:stream  update
+1680693393172:stream  delete --name ps-stream1
+1680693402989:stream destroy --name ps-stream1
+1680693456738:stream create --definition "http --port=20001 | file --directory=/home/cnb/scdf/df-out --name=output --suffix=txt" --name ps-stream1 --deploy true
+1680693487910:stream list
+1680694059674:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output2 --suffix=txt" --name ps-stream1 --deploy true
+1680694072825:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output2 --suffix=txt" --name ps-stream2 --deploy true
+1680694497374:stream destroy --name ps-stream2
+1680694531972:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression='''payload'''+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output2 --suffix=txt" --name ps-stream2 --deploy true
+1680694658924:stream destroy --name ps-stream2
+1680694687030:# stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload.append('updated') | output: file --directory=/home/cnb/scdf/df-out --name=output2 --suffix=txt" --name ps-stream2 --deploy true
+1680694696191:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload.append('updated') | output: file --directory=/home/cnb/scdf/df-out --name=output2 --suffix=txt" --name ps-stream2 --deploy true
+1680694805253:stream destroy --name ps-stream2
+1680694810557:# stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload.append('updated') | output: file --directory=/home/cnb/scdf/df-out --name=output3 --suffix=txt" --name ps-stream3 --deploy true
+1680694830774:stream list
+1680695021657:stream destroy --name ps-stream3
+1680695030674:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload.toString()+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output4 --suffix=txt" --name ps-stream4 --deploy true
+1680695065050:stream list
+1680695140807:stream destroy --name ps-stream4
+1680695145621:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=new String(payload)+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output4 --suffix=txt" --name ps-stream4 --deploy true
+1680695391132:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression='new String(payload)'+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output4 --suffix=txt" --name ps-stream4 --deploy true
+1680695395719:stream list
+1680696276659:app import --uri https://dataflow.spring.io/task-maven-latest
+1680696385279:app list
+1680696508914:streams list
+1680696515294:stream list
+1680696521317:stream destroy --name ps-stream4
+1680696546367:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload.toString()+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output5 --suffix=txt" --name ps-stream5 --deploy true
+1680696552313:stream destroy --name ps-stream4
+1680696554728:stream list
+1680696675467:stream destroy --name ps-stream5
+1680696681510:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=\\"new String(payload)\\"+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output5 --suffix=txt" --name ps-stream5 --deploy true
+1680696815760:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --transformer.expression=payload+'-updated' | output: file --directory=/home/cnb/scdf/df-out --name=output5 --suffix=txt" --name ps-stream5 --deploy true
+1680696880509:stream destroy --name ps-stream5
+1680696883098:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --transformer.expression=payload.append('-updated') | output: file --directory=/home/cnb/scdf/df-out --name=output5 --suffix=txt" --name ps-stream5 --deploy true
+1680697084787:stream destroy --name ps-stream5
+1680697089811:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --transformer.expression=payload.concat('-updated') | output: file --directory=/home/cnb/scdf/df-out --name=output5 --suffix=txt" --name ps-stream5 --deploy true
+1680697097143:stream list
+1680697186262:stream destroy --name ps-stream5
+1680697190840:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --transformer.expression=payload.toUpperCase() | output: file --directory=/home/cnb/scdf/df-out --name=output6 --suffix=txt" --name ps-stream6 --deploy true
+1680697356145:task create ps-taks-1 --definition "timestamp --format\\"MM-yy\\""
+1680697370725:task create ps-taks-1 --definition "timestamp --format \\"MM-yy\\""
+1680697388367:task create ps-taks-1 --definition timestamp --format \\"MM-yy\\"
+1680697396567:task create ps-taks-1 --definition 'timestamp --format \\"MM-yy\\"'
+1680697412521:task create ps-taks-1 --definition 'timestamp --format "MM-yy"'
+1680697425840:task create ps-taks-1 --definition "timestamp --format 'MM-yy'"
+1680697434387:task create ps-taks-1 --definition "timestamp --format='MM-yy'"
+1680697441960:task create ps-taks-1 --definition "timestamp --format=\\"MM-yy\\""
+1680697466986:task list
+1680697491814:task execution list
+1680697540158:task launch ps-taks-1
+1680697551487:task execution list
+1680697565116:task execution log
+1680697568319:task execution log 1
+1680697584606:task execution log 0
+1680697586038:task execution log 1
+1680697629742:task destroy ps-taks-1
+1680697641201:task create ps-taks-1 --definition "timestamp --format=\\"MM-yy\\""
+1680697650035:task launch ps-taks-1\ntask execution list\ntask execution log 1
+1680697656825:task launch ps-t
+1680697664687:task launch ps-taks-1
+1680697674189:task execution log 2
+1680698449640:stream destroy --name ps-stream6
+1680698465461:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=payload.toUpperCase() | output: file --directory=/home/cnb/scdf/df-out --name=output7 --suffix=txt" --name ps-stream6 --deploy true
+1680698503831:stream list
+1680698541128:stream logs
+1680698739823:stream destroy --name ps-stream6
+1680698748477:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression='payload.toUpperCase() '| output: file --directory=/home/cnb/scdf/df-out --name=output7 --suffix=txt" --name ps-stream7 --deploy true
+1680698753862:stream list
+1680698857561:stream destroy --name ps-stream6
+1680698859575:stream destroy --name ps-stream7
+1680698870191:stream create --definition "input: file --directory=/home/cnb/scdf/df-in | transform --expression=\\"new String(payload).toUpperCase()\\" | output: file --directory=/home/cnb/scdf/df-out --name=output7 --suffix=txt" --name ps-stream7 --deploy true
+1680698894648:stream info
+1680698902730:stream info ps-stream7
+1680698987607:stream history
+1680698996174:stream history ps-stream7
+1680699314538:stream platform-list
+1680701341336:app register --name itemFilter --type processor --uri maven://com.cx:dataflow:0.0.1-SNAPSHOT
+1680701566689:app unregister --name itemFilter
+1680701586356:app unregister ----name itemFilter
+1680701592388:app unregister --name itemFilter
+1680701598187:app unregister --name itemFilter --type processor
+1680701678467:app register --name itemFilter --type processor --uri maven://com.cx:dataflow:0.0.1-SNAPSHOT
+1680706761521:app unregister --name itemFilter --type processor
+1680706764227:app register --name itemFilter --type processor --uri maven://com.cx:dataflow:0.0.1-SNAPSHOT
+1680707070150:app unregister --name itemFilter --type processor
+1680707075166:app register --name itemFilter --type processor --uri maven://com.cx:dataflow:0.0.2-SNAPSHOT
+1680707464660:app unregister --name itemFilter --type processor
+1680707496560:app register --name itemFilter --type processor --uri maven://com.cx:dataflow:0.0.3-SNAPSHOT
+1680707765124:stream create --definition "http --port=20002 | itemFilter > log" --name item-1 --deploy true
+1680707798475:stream create --definition "http --port=20002 | itemFilter | log" --name item-1 --deploy true
+1680707838258:stacktrace
+1680708232234:app register --name itemFilter --type processor --uri maven://com.cx:dataflow:jar:0.0.1-SNAPSHOT
+1680708246239:app unregister --name itemFilter --type processor
+1680708258406:app register --name itemFilter --type processor --uri maven://com.cx:dataflow:0.0.1-SNAPSHOT
+1680708925401:app unregister --name itemFilter --type processor
+1680708928688:app register --name itemFilter --type processor --uri maven://com.cx:dataflow:0.0.1-SNAPSHOT
+1680708946998:stream create --definition "http --port=20002 | itemFilter | log" --name item-1 --deploy true
+1680708957800:stacktrace
+1680708977027:stream create --definition "http --port=20002 | itemFilter | log" --name item-2 --deploy true
+1680709099230:stacktrace
+1680709233261:stream create --definition "http --port=20002 | itemFilter | log" --name item-2 --deploy true
+1680709251231:stream create --definition "http --port=20002 | itemFilter | log" --name item-3 --deploy true
+1680709932095:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/dataflow-0.0.1-SNAPSHOT.jar
+1680709938829:app unregister --name itemFilter --type processor
+1680709940571:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/dataflow-0.0.1-SNAPSHOT.jar
+1680709946771:stream create --definition "http --port=20002 | itemFilter | log" --name item-4 --deploy true
+1680709974072:stream list
+1680710208388:app unregister --name itemFilter --type processor
+1680710227168:stream destroy --name item-4
+1680710244753:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680710252921:app unregister --name itemFilter --type processor
+1680710255726:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680710262384:stream create --definition "http --port=20002 | itemFilter | log" --name item-4 --deploy true
+1680710452111:app unregister --name itemFilter --type processor
+1680710456070:stream destroy --name item-4
+1680710458524:app unregister --name itemFilter --type processor
+1680710462215:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680710465475:stream create --definition "http --port=20002 | itemFilter | log" --name item-4 --deploy true
+1680711046896:stream destroy --name item-4
+1680711049669:app unregister --name itemFilter --type processor
+1680711053297:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680711062398:stream create --definition "http --port=20002 | itemFilter | log" --name item-4 --deploy true
+1680711146247:stream destroy --name item-4
+1680711148198:app unregister --name itemFilter --type processor
+1680711155915:stream create --definition "http --port=20003 | itemFilter | log" --name item-4 --deploy true
+1680711161599:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680711164536:stream create --definition "http --port=20003 | itemFilter | log" --name item-4 --deploy true
+1680711441309:app unregister --name itemFilter --type processor
+1680711444764:stream destroy --name item-4
+1680711446929:app unregister --name itemFilter --type processor
+1680711592362:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680711625651:stream create --definition "http --port=20002 | itemFilter --item.filter="abc" | log" --name item-2 --deploy true
+1680711639214:stacktrace
+1680711699776:stream create --definition "http --port=20002 | itemFilter --item.filter=abc | log" --name item-2 --deploy true
+1680711707177:stacktrace
+1680711722530:stream destroy --name item-4
+1680711728362:app unregister --name itemFilter --type processor
+1680711733528:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680711737895:stream create --definition "http --port=20002 | itemFilter --item.filter=abc | log" --name item-2 --deploy true
+1680711742190:stacktrace
+1680711760439:stream create --definition "http --port=20002 | itemFilter --item.filter=abc | log" --name item-3 --deploy true
+1680711776157:stacktrace
+1680711792960:stream list
+1680711798143:app list
+1680711886145:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680711894299:app unregister --name itemFilter --type processor
+1680711898233:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680711909258:stream create --definition "http --port=20002 | itemFilter --filter='abc' | log" --name item-3 --deploy true
+1680711958758:stream create --definition "http --port=20002 | itemFilter --filter='abc' | log" --name item-4 --deploy true
+1680712001146:stream destroy --name item-4
+1680712003425:stream destroy --name item-3
+1680712004725:stream destroy --name item-2
+1680712014846:stream create --definition "http --port=20005 | itemFilter --filter='abc' | log" --name item-5 --deploy true
+1680712467861:stream destroy --name item-
+1680712469304:stream destroy --name item-5
+1680712473771:app unregister --name itemFilter --type processor
+1680712592301:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.1-SNAPSHOT.jar
+1680712603054:stream create --definition "http --port=2006 | itemFilter --filter='abc' | log" --name item-6 --deploy true
+1680712692286:stream create --definition "http --port=20006 | itemFilter --filter='abc' | log" --name item-6 --deploy true
+1680712698790:stream destroy --name item-6
+1680712701823:stream create --definition "http --port=20006 | itemFilter --filter='abc' | log" --name item-6 --deploy true
+1680712777373:stream destroy --name item-6
+1680713234648:stream destroy --name item-7
+1680713236830:stream destroy --name item-6
+1680713242596:app unregister --name itemFilter --type processor
+1680713252233:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.3-SNAPSHOT.jar
+1680713258415:app unregister --name itemFilter --type processor
+1680713261281:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.2-SNAPSHOT.jar
+1680713268527:stream create --definition "http --port=20006 | itemFilter --filter='abc' | log" --name item-6 --deploy true
+1680713406569:app unregister --name itemFilter --type processor
+1680713412578:stream destroy --name item-6
+1680713414279:app unregister --name itemFilter --type processor
+1680713450801:app register --name itemFilter --type processor --uri file:///home/cnb/scdf/target/dataflow-0.0.2-SNAPSHOT.jar
+1680713456377:stream create --definition "http --port=20006 | itemFilter --filter='abc' | log" --name item-6 --deploy true
+1680714629870:stream destroy --name item-5
+1680714656622:stream create --definition "http --port=20002 | itemFilter --filter='abf' | log" --name item-2 --deploy true
